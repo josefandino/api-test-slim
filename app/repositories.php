@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Domain\User\UserRepository;
-use App\Infrastructure\Persistence\User\PDOUserRepository;
+use App\Modules\User\Domain\UserRepository;
+use App\Modules\User\Infrastructure\PDOUserRepository;
 use DI\ContainerBuilder;
 
 return function (ContainerBuilder $containerBuilder) {

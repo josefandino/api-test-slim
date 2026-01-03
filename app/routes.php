@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
-use App\Application\Actions\User\ListUsersAction;
-use App\Application\Actions\User\ViewUserAction;
+use App\Modules\User\Action\ListUsersAction;
+use App\Modules\User\Action\ViewUserAction;
+use App\Modules\User\Action\CreateUserAction;
+use App\Modules\User\Action\UpdateUserAction;
+use App\Modules\User\Action\DeleteUserAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
@@ -23,8 +26,8 @@ return function (App $app) {
     $app->group('/users', function (Group $group) {
         $group->get('', ListUsersAction::class);
         $group->get('/{id}', ViewUserAction::class);
-        $group->post('', \App\Application\Actions\User\CreateUserAction::class);
-        $group->map(['PUT', 'PATCH'], '/{id}', \App\Application\Actions\User\UpdateUserAction::class);
-        $group->delete('/{id}', \App\Application\Actions\User\DeleteUserAction::class);
+        $group->post('', CreateUserAction::class);
+        $group->map(['PUT', 'PATCH'], '/{id}', UpdateUserAction::class);
+        $group->delete('/{id}', DeleteUserAction::class);
     });
 };

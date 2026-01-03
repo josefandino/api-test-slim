@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\User;
+namespace App\Modules\User\Domain;
 
 use App\Application\Constants\Messages;
 use App\Domain\DomainException\DomainRecordNotFoundException;

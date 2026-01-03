@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence\User;
+namespace App\Modules\User\Infrastructure;
 
-use App\Domain\User\User;
-use App\Domain\User\UserNotFoundException;
-use App\Domain\User\UserRepository;
+use App\Modules\User\Domain\User;
+use App\Modules\User\Domain\UserNotFoundException;
+use App\Modules\User\Domain\UserRepository;
 use PDO;
 
 class PDOUserRepository implements UserRepository

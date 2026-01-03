@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Actions\User;
+namespace App\Modules\User\Action;
 
 use App\Application\Constants\HttpStatus;
 use App\Application\Constants\Messages;

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Actions\User;
+namespace App\Modules\User\Action;
 
 use App\Application\Constants\HttpStatus;
 use App\Application\Constants\Messages;
-use App\Domain\User\User;
-use App\Domain\User\UserNotFoundException;
+use App\Modules\User\Domain\User;
+use App\Modules\User\Domain\UserNotFoundException;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Exception\HttpBadRequestException;
 use Respect\Validation\Validator as v;
