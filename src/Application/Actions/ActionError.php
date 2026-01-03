@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace App\Application\Actions;
 
+use App\Application\Constants\ErrorCodes;
 use JsonSerializable;
 
 class ActionError implements JsonSerializable
 {
-    public const BAD_REQUEST = 'BAD_REQUEST';
-    public const INSUFFICIENT_PRIVILEGES = 'INSUFFICIENT_PRIVILEGES';
-    public const NOT_ALLOWED = 'NOT_ALLOWED';
-    public const NOT_IMPLEMENTED = 'NOT_IMPLEMENTED';
-    public const RESOURCE_NOT_FOUND = 'RESOURCE_NOT_FOUND';
-    public const SERVER_ERROR = 'SERVER_ERROR';
-    public const UNAUTHENTICATED = 'UNAUTHENTICATED';
-    public const VALIDATION_ERROR = 'VALIDATION_ERROR';
-    public const VERIFICATION_ERROR = 'VERIFICATION_ERROR';
+    public const BAD_REQUEST = ErrorCodes::BAD_REQUEST;
+    public const INSUFFICIENT_PRIVILEGES = ErrorCodes::INSUFFICIENT_PRIVILEGES;
+    public const NOT_ALLOWED = ErrorCodes::NOT_ALLOWED;
+    public const NOT_IMPLEMENTED = ErrorCodes::NOT_IMPLEMENTED;
+    public const RESOURCE_NOT_FOUND = ErrorCodes::RESOURCE_NOT_FOUND;
+    public const SERVER_ERROR = ErrorCodes::SERVER_ERROR;
+    public const UNAUTHENTICATED = ErrorCodes::UNAUTHENTICATED;
+    public const VALIDATION_ERROR = ErrorCodes::VALIDATION_ERROR;
+    public const VERIFICATION_ERROR = ErrorCodes::VERIFICATION_ERROR;
 
     private string $type;
 

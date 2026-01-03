@@ -8,33 +8,31 @@ use JsonSerializable;
 
 class User implements JsonSerializable
 {
-    private ?int $id;
+    private ?string $id;
 
-    private string $username;
-
-    private string $firstName;
+    private ?string $firstName;
 
     private string $lastName;
 
-    public function __construct(?int $id, string $username, string $firstName, string $lastName)
+    private string $email;
+    
+    private ?string $password;
+
+    public function __construct(?string $id, ?string $firstName, string $lastName, string $email, ?string $password = null)
     {
         $this->id = $id;
-        $this->username = strtolower($username);
-        $this->firstName = ucfirst($firstName);
+        $this->firstName = $firstName ? ucfirst($firstName) : null;
         $this->lastName = ucfirst($lastName);
+        $this->email = strtolower($email);
+        $this->password = $password;
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function getUsername(): string
-    {
-        return $this->username;
-    }
-
-    public function getFirstName(): string
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
@@ -44,14 +42,29 @@ class User implements JsonSerializable
         return $this->lastName;
     }
 
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
+    }
+
     #[\ReturnTypeWillChange]
     public function jsonSerialize(): array
     {
         return [
             'id' => $this->id,
-            'username' => $this->username,
             'firstName' => $this->firstName,
             'lastName' => $this->lastName,
+            'email' => $this->email,
         ];
     }
 }

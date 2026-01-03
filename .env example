@@ -1,1 +1,7 @@
 
+
+DB_HOST=
+DB_NAME=api_name
+DB_USER=api_user
+DB_PASS=MYPass
+PORT=3306

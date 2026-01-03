@@ -73,9 +73,17 @@ abstract class Action
     /**
      * @param array|object|null $data
      */
-    protected function respondWithData($data = null, int $statusCode = 200): Response
+    protected function respondWithData($data = null, int $statusCode = 200, string $message = 'Success', int $total = 0): Response
     {
-        $payload = new ActionPayload($statusCode, $data);
+        $payload = new ActionPayload($statusCode, $data, null, $message, $total);
+
+        return $this->respond($payload);
+    }
+
+    protected function respondWithError(string $type, string $description, int $statusCode = 400): Response
+    {
+        $error = new ActionError($type, $description);
+        $payload = new ActionPayload($statusCode, null, $error);
 
         return $this->respond($payload);
     }

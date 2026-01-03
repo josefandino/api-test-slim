@@ -6,7 +6,7 @@ namespace App\Application\Actions\User;
 
 use Psr\Http\Message\ResponseInterface as Response;
 
-class ViewUserAction extends UserAction
+class DeleteUserAction extends UserAction
 {
     /**
      * {@inheritdoc}
@@ -14,10 +14,11 @@ class ViewUserAction extends UserAction
     protected function action(): Response
     {
         $userId = $this->resolveArg('id');
-        $user = $this->userRepository->findUserOfId($userId);
 
-        $this->logger->info("User of id {$userId} was viewed.");
+        $this->userRepository->delete($userId);
 
-        return $this->respondWithData($user);
+        $this->logger->info("User of id `${userId}` was deleted.");
+
+        return $this->respondWithData(null, 200, 'User deleted successfully.');
     }
 }
