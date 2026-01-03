@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Application\Actions\User;
 
+use App\Application\Constants\HttpStatus;
+use App\Application\Constants\Messages;
+use App\Domain\DomainException\DomainRecordNotFoundException;
 use Psr\Http\Message\ResponseInterface as Response;
 
 class DeleteUserAction extends UserAction
@@ -15,10 +18,14 @@ class DeleteUserAction extends UserAction
     {
         $userId = $this->resolveArg('id');
 
-        $this->userRepository->delete($userId);
+        try {
+            $this->userRepository->delete($userId);
+            $this->logger->info("User of id {$userId} was deleted.");
+        } catch (DomainRecordNotFoundException $e) {
+            // Idempotency: If user not found, treat as successful delete to prevent enumeration
+            $this->logger->info("Delete request for non-existent user id {$userId} processed.");
+        }
 
-        $this->logger->info("User of id `${userId}` was deleted.");
-
-        return $this->respondWithData(null, 200, 'User deleted successfully.');
+        return $this->respondWithData(null, HttpStatus::OK, Messages::USER_DELETED);
     }
 }

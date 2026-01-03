@@ -25,4 +25,9 @@ class Messages
     // Fallbacks
     public const FIELD_REQUIRED = 'es requerido';
     public const FIELD_NOT_EMPTY = 'no puede estar vacío';
+
+    // Actions
+    public const USER_DELETED = 'Usuario eliminado exitosamente.';
+    public const USER_NOT_FOUND = 'El usuario solicitado no existe.';
+    public const USER_UPDATED = 'Usuario actualizado exitosamente.';
 }

@@ -24,7 +24,7 @@ return function (App $app) {
         $group->get('', ListUsersAction::class);
         $group->get('/{id}', ViewUserAction::class);
         $group->post('', \App\Application\Actions\User\CreateUserAction::class);
-        $group->put('/{id}', \App\Application\Actions\User\UpdateUserAction::class);
+        $group->map(['PUT', 'PATCH'], '/{id}', \App\Application\Actions\User\UpdateUserAction::class);
         $group->delete('/{id}', \App\Application\Actions\User\DeleteUserAction::class);
     });
 };
