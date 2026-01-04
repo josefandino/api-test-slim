@@ -32,8 +32,11 @@ class JwtAuthService implements AuthServiceInterface
         
         // Ensure we have a valid interval, default to 2 hours if generic
         $interval = $this->expiresIn;
-        if (!preg_match('/^[+\-]/', $interval)) {
-            $interval = '+' . $interval;
+        // Expand short syntax (2h -> 2 hours) for compatibility
+        $interval = str_ireplace(['h', 'm'], [' hours', ' minutes'], $interval);
+        
+        if (!preg_match('/^[+\-]/', trim($interval))) {
+            $interval = '+' . trim($interval);
         }
         
         $expire = $issuedAt->modify($interval);

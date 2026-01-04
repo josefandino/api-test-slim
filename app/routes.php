@@ -8,6 +8,7 @@ use App\Modules\User\Action\ViewUserAction;
 use App\Modules\User\Action\CreateUserAction;
 use App\Modules\User\Action\UpdateUserAction;
 use App\Modules\User\Action\DeleteUserAction;
+use App\Modules\Auth\Middleware\JwtMiddleware;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
@@ -30,12 +31,13 @@ return function (App $app) {
             $group->post('/login', \App\Modules\Auth\Action\LoginAction::class);
         });
 
+        // Protected Routes
         $group->group('/users', function (Group $group) {
             $group->get('', ListUsersAction::class);
             $group->get('/{id}', ViewUserAction::class);
             $group->post('', CreateUserAction::class);
             $group->map(['PUT', 'PATCH'], '/{id}', UpdateUserAction::class);
             $group->delete('/{id}', DeleteUserAction::class);
-        });
+        })->add(JwtMiddleware::class);
     });
 };
