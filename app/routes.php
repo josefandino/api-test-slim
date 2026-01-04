@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Application\Constants\AppConfig;
 use App\Modules\User\Action\ListUsersAction;
 use App\Modules\User\Action\ViewUserAction;
 use App\Modules\User\Action\CreateUserAction;
@@ -18,16 +19,19 @@ return function (App $app) {
         return $response;
     });
 
-    $app->get('/', function (Request $request, Response $response) {
-        $response->getBody()->write('Hello world!');
-        return $response;
-    });
+    // Centralized API Version Group
+    $app->group(AppConfig::API_VERSION, function (Group $group) {
+        $group->get('/', function (Request $request, Response $response) {
+            $response->getBody()->write('Hello world!');
+            return $response;
+        });
 
-    $app->group('/users', function (Group $group) {
-        $group->get('', ListUsersAction::class);
-        $group->get('/{id}', ViewUserAction::class);
-        $group->post('', CreateUserAction::class);
-        $group->map(['PUT', 'PATCH'], '/{id}', UpdateUserAction::class);
-        $group->delete('/{id}', DeleteUserAction::class);
+        $group->group('/users', function (Group $group) {
+            $group->get('', ListUsersAction::class);
+            $group->get('/{id}', ViewUserAction::class);
+            $group->post('', CreateUserAction::class);
+            $group->map(['PUT', 'PATCH'], '/{id}', UpdateUserAction::class);
+            $group->delete('/{id}', DeleteUserAction::class);
+        });
     });
 };
