@@ -14,9 +14,9 @@ return function (ContainerBuilder $containerBuilder) {
         SettingsInterface::class => function () {
             return new Settings([
                 // Should be set to false in production
-                'displayErrorDetails' => true, 
-                'logError'            => false,
-                'logErrorDetails'     => false,
+                'displayErrorDetails' => false, 
+                'logError'            => true,
+                'logErrorDetails'     => true,
                 'logger' => [
                     'name' => 'slim-app',
                     'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
