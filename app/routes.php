@@ -26,6 +26,10 @@ return function (App $app) {
             return $response;
         });
 
+        $group->group('/auth', function (Group $group) {
+            $group->post('/login', \App\Modules\Auth\Action\LoginAction::class);
+        });
+
         $group->group('/users', function (Group $group) {
             $group->get('', ListUsersAction::class);
             $group->get('/{id}', ViewUserAction::class);

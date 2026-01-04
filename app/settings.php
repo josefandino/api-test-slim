@@ -14,7 +14,7 @@ return function (ContainerBuilder $containerBuilder) {
         SettingsInterface::class => function () {
             return new Settings([
                 // Should be set to false in production
-                'displayErrorDetails' => false, 
+                'displayErrorDetails' => true, 
                 'logError'            => false,
                 'logErrorDetails'     => false,
                 'logger' => [
